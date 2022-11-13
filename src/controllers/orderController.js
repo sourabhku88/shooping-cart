@@ -10,7 +10,7 @@ const placeOrder=async function(req,res){
       if (!mongoose.isValidObjectId(userId)) return res.status(400).send({ status: false, message: "userId not valid" })
       
        
-      const userCheck = await userModel.find({ userId });
+      const userCheck = await userModel.findOne({ userId });
       if (!userCheck)  return res.status(404).send({ status: false, message: "No such user exists" }) 
 
       let cartId = req.body.cartId;
