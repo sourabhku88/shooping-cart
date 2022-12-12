@@ -6,8 +6,9 @@ aws.config.update({
     region: "ap-south-1"
 })
 
-const uploadFile = async (file) =>{
 
+const uploadFile = async (file) =>{
+    try{
     return new Promise( function(resolve, reject) {
         
         let s3= new aws.S3({apiVersion: '2006-03-01'}); 
@@ -26,6 +27,11 @@ const uploadFile = async (file) =>{
         })
     
        })
+    }catch(err){return console.log(err)}
 
 }
-module.exports = {uploadFile}
+
+
+// some error in aws cloud ->>>
+
+module.exports = {uploadFile }

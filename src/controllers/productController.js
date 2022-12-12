@@ -55,10 +55,10 @@ const newProduct= async function(req,res){
         installments = (parseInt(installments))
         if(typeof( installments )!=="number") return res.status(400).send({status:false,message:"installments should only be in digits"})
     }
-    if (!isValidFiles(file)) return res.status(400).send({status:false, message:"product image required"})
+    // if (!isValidFiles(file)) return res.status(400).send({status:false, message:"product image required"})
 
-    const productImage = await uploadFile(file[0]);
-    req.body.productImage = productImage;
+    // const productImage = await uploadFile(file[0]);
+    req.body.productImage = "https://m.media-amazon.com/images/I/61yBCMmuI4L._UL1440_.jpg";
     req.body.availableSizes = availableSizes;
     req.body.installments = installments;
 
@@ -75,7 +75,7 @@ try{
    
     if(Object.keys(rest).length !== 0)  return res.status(400).send({status:false,message:`You can't filter for this key`})
 
-    if(!/^(-1|1)$/.test(priceSort)) return res.status(400).send({status:false,message:`you can priceSort only this value 1 ,-1.`})
+    if(!/^(-1|1)$/.test(priceSort) && priceSort !== undefined) return res.status(400).send({status:false,message:`you can priceSort only this value 1 ,-1.`})
 
     const priceSorter = (data,priceSort)=> {
     if(priceSort == -1) data.sort((a,b)=> a.price - b.price); // dec
